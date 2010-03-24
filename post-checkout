@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+import os
+
+def run(top_path):
+    """
+    Walks the given path looking for *.pyc files. For each .pyc file found, it
+    looks for the matching .py and warns if it's missing.
+    """
+    for (dirpath, dirnames, filenames) in os.walk(top_path):
+        for filename in filenames:
+            fullpath = os.path.join(dirpath, filename)
+            if fullpath.endswith('.pyc'):
+                sourcefilename = fullpath[:-1]
+                if not os.path.exists(sourcefilename):
+                    print("Missing source file %s" % sourcefilename)
+
+
+if __name__ == '__main__':
+    import sys
+    is_branch_checkout = int(sys.argv[3])
+    if is_branch_checkout:
+        run('.')
