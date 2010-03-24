@@ -13,7 +13,7 @@ def run(top_path):
             if fullpath.endswith('.pyc'):
                 sourcefilename = fullpath[:-1]
                 if not os.path.exists(sourcefilename):
-                    print("Missing source file %s" % sourcefilename)
+                    print("Warning: orphaned object file: %s" % fullpath)
 
 
 if __name__ == '__main__':
